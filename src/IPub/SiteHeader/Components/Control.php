@@ -117,10 +117,12 @@ final class Control extends Application\UI\Control
 
 		echo $title, PHP_EOL;
 
-		if ($this->configuration->getMetaTags()) {
+		$metaTags = $this->configuration->getMetaTags();
+
+		if ($metaTags) {
 			echo '<!-- Meta Tags -->', PHP_EOL;
 
-			foreach ($this->configuration->getMetaTags() as $name => $content) {
+			foreach ($metaTags as $name => $content) {
 				$metaCustom = Utils\Html::el('meta');
 				$metaCustom->addAttributes([
 					'name'    => $name,
@@ -131,24 +133,28 @@ final class Control extends Application\UI\Control
 			}
 		}
 
-		if ($this->configuration->getFavicon()) {
+		$favicon = $this->configuration->getFavicon();
+
+		if ($favicon) {
 			echo '<!-- Favicon -->', PHP_EOL;
 
-			$favicon = Utils\Html::el('link');
-			$favicon->setAttribute('rel', 'shortcut icon');
-			$favicon->href($this->configuration->getFavicon());
+			$faviconTag = Utils\Html::el('link');
+			$faviconTag->setAttribute('rel', 'shortcut icon');
+			$faviconTag->href($favicon);
 
-			echo $favicon, PHP_EOL;
+			echo $faviconTag, PHP_EOL;
 		}
 
-		if ($this->configuration->getCustomLinks()) {
+		$customLinks = $this->configuration->getCustomLinks();
+
+		if ($customLinks) {
 			echo '<!-- Custom -->', PHP_EOL;
 
-			foreach ($this->configuration->getCustomLinks() as $attributes) {
-				$customLink = Utils\Html::el('link');
-				$customLink->addAttributes($attributes);
+			foreach ($customLinks as $attributes) {
+				$customLinkTag = Utils\Html::el('link');
+				$customLinkTag->addAttributes($attributes);
 
-				echo $customLink, PHP_EOL;
+				echo $customLinkTag, PHP_EOL;
 			}
 		}
 	}

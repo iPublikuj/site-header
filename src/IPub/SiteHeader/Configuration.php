@@ -224,32 +224,25 @@ final class Configuration extends Nette\Object
 		switch ($this->documentType) {
 			case self::HTML_4_STRICT:
 				return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
-				break;
 
 			case self::HTML_4_TRANSITIONAL:
 				return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-				break;
 
 			case self::HTML_4_FRAMESET:
 				return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">';
-				break;
 
 			case self::XHTML_1_STRICT:
 				return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
-				break;
 
 			case self::XHTML_1_TRANSITIONAL:
 				return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-				break;
 
 			case self::XHTML_1_FRAMESET:
 				return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">';
-				break;
 
 			case self::HTML_5:
 			default:
 				return '<!DOCTYPE html>';
-				break;
 		}
 	}
 
@@ -325,7 +318,7 @@ final class Configuration extends Nette\Object
 	 */
 	public function getTitle($index = NULL)
 	{
-		if ($index) {
+		if ($index !== NULL) {
 			if ($this->title === []) {
 				return NULL;
 
