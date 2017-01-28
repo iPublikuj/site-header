@@ -74,13 +74,11 @@ final class Control extends Application\UI\Control
 	{
 		$contentType = $this->configuration->getContentType();
 
-		if ($contentType === SiteHeader\Configuration::CONTENT_TYPE_APPLICATION_XHTML) {
-			if (!headers_sent()) {
+		if (!headers_sent()) {
+			if ($contentType === SiteHeader\Configuration::CONTENT_TYPE_APPLICATION_XHTML) {
 				$this->httpResponse->setHeader('Vary', 'Accept');
 			}
-		}
 
-		if (!headers_sent()) {
 			$this->httpResponse->setContentType($this->configuration->getContentType(), 'utf-8');
 		}
 
@@ -117,46 +115,11 @@ final class Control extends Application\UI\Control
 
 		echo $title, PHP_EOL;
 
-		$metaTags = $this->configuration->getMetaTags();
+		$this->renderMetatags();
 
-		if ($metaTags !== []) {
-			echo '<!-- Meta Tags -->', PHP_EOL;
+		$this->renderFavicon();
 
-			foreach ($metaTags as $name => $content) {
-				$metaCustom = Utils\Html::el('meta');
-				$metaCustom->addAttributes([
-					'name'    => $name,
-					'content' => $content,
-				]);
-
-				echo $metaCustom, PHP_EOL;
-			}
-		}
-
-		$favicon = $this->configuration->getFavicon();
-
-		if ($favicon) {
-			echo '<!-- Favicon -->', PHP_EOL;
-
-			$faviconTag = Utils\Html::el('link');
-			$faviconTag->setAttribute('rel', 'shortcut icon');
-			$faviconTag->href($favicon);
-
-			echo $faviconTag, PHP_EOL;
-		}
-
-		$customLinks = $this->configuration->getCustomLinks();
-
-		if ($customLinks !== []) {
-			echo '<!-- Custom -->', PHP_EOL;
-
-			foreach ($customLinks as $attributes) {
-				$customLinkTag = Utils\Html::el('link');
-				$customLinkTag->addAttributes($attributes);
-
-				echo $customLinkTag, PHP_EOL;
-			}
-		}
+		$this->renderCustomLinks();
 	}
 
 	/**
@@ -217,5 +180,65 @@ final class Control extends Application\UI\Control
 		}
 
 		return $html;
+	}
+
+	/**
+	 * @return void
+	 */
+	private function renderMetatags()
+	{
+		$metaTags = $this->configuration->getMetaTags();
+
+		if ($metaTags !== []) {
+			echo '<!-- Meta Tags -->', PHP_EOL;
+
+			foreach ($metaTags as $name => $content) {
+				$metaCustom = Utils\Html::el('meta');
+				$metaCustom->addAttributes([
+					'name'    => $name,
+					'content' => $content,
+				]);
+
+				echo $metaCustom, PHP_EOL;
+			}
+		}
+
+	}
+
+	/**
+	 * @return void
+	 */
+	private function renderFavicon()
+	{
+		$favicon = $this->configuration->getFavicon();
+
+		if ($favicon) {
+			echo '<!-- Favicon -->', PHP_EOL;
+
+			$faviconTag = Utils\Html::el('link');
+			$faviconTag->setAttribute('rel', 'shortcut icon');
+			$faviconTag->href($favicon);
+
+			echo $faviconTag, PHP_EOL;
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	private function renderCustomLinks()
+	{
+		$customLinks = $this->configuration->getCustomLinks();
+
+		if ($customLinks !== []) {
+			echo '<!-- Custom -->', PHP_EOL;
+
+			foreach ($customLinks as $attributes) {
+				$customLinkTag = Utils\Html::el('link');
+				$customLinkTag->addAttributes($attributes);
+
+				echo $customLinkTag, PHP_EOL;
+			}
+		}
 	}
 }
