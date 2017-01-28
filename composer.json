@@ -1,0 +1,58 @@
+{
+	"name"			: "ipub/site-header",
+	"type"			: "library",
+	"description"	: "Site header creator for Nette Framework",
+	"keywords"		: ["nette", "header", "tools", "ipub", "ipublikuj"],
+	"homepage"		: "https://github.com/iPublikuj/site-header",
+	"license"		: ["GPL-2.0", "GPL-3.0"],
+
+	"authors": [
+		{
+			"name"		: "iPublikuj:cms",
+			"email"		: "info@ipublikuj.eu",
+			"homepage"	: "http://www.ipublikuj.eu/"
+		}
+	],
+
+	"support": {
+		"email"		:"support@ipublikuj.eu",
+		"issues"	:"https://github.com/iPublikuj/site-header/issues"
+	},
+
+	"extra": {
+		"ipub"	: {
+			"configuration" : {
+				"extensions" : {
+					"siteHeader" : "IPub\\SiteHeader\\DI\\SiteHeaderExtension"
+				}
+			}
+		}
+	},
+
+	"require": {
+		"php"	: ">=7.0.0",
+
+		"nette/application"	: "~2.3",
+		"nette/di"			: "~2.3",
+		"nette/http"		: "~2.3",
+		"nette/utils"		: "~2.3",
+
+		"pds/skeleton"	: "@dev"
+	},
+
+	"require-dev": {
+		"nette/bootstrap"		: "~2.3",
+		"nette/mail"			: "~2.3",
+		"nette/safe-stream"		: "~2.3",
+		"nette/robot-loader"	: "~2.3",
+		"nette/tester"			: "@dev",
+
+		"tracy/tracy"	: "@dev"
+	},
+
+	"autoload": {
+		"psr-0": {
+			"IPub\\SiteHeader\\": "src/"
+		}
+	}
+}
