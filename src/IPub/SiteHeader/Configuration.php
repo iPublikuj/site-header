@@ -122,15 +122,15 @@ final class Configuration extends Nette\Object
 
 	/**
 	 * @param Http\Request $httpRequest
-	 * @param Localization\ITranslator $translator
+	 * @param Localization\ITranslator|NULL $translator
 	 */
 	public function __construct(
 		Http\Request $httpRequest,
-		Localization\ITranslator $translator
+		Localization\ITranslator $translator = NULL
 	) {
 		$this->httpRequest = $httpRequest;
 
-		if (method_exists($translator, 'getLocale')) {
+		if ($translator && method_exists($translator, 'getLocale')) {
 			$this->setLanguage($translator->getLocale());
 		}
 
