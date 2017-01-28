@@ -119,7 +119,7 @@ final class Control extends Application\UI\Control
 
 		$metaTags = $this->configuration->getMetaTags();
 
-		if ($metaTags) {
+		if ($metaTags !== []) {
 			echo '<!-- Meta Tags -->', PHP_EOL;
 
 			foreach ($metaTags as $name => $content) {
@@ -147,7 +147,7 @@ final class Control extends Application\UI\Control
 
 		$customLinks = $this->configuration->getCustomLinks();
 
-		if ($customLinks) {
+		if ($customLinks !== []) {
 			echo '<!-- Custom -->', PHP_EOL;
 
 			foreach ($customLinks as $attributes) {
