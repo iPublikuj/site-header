@@ -3,8 +3,8 @@
  * Control.php
  *
  * @copyright      More in license.md
- * @license        http://www.fastybird.com
- * @author         Adam Kadlec http://www.fastybird.com
+ * @license        https://www.ipublikuj.eu
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  * @package        iPublikuj:SiteHeader!
  * @subpackage     Addons
  * @since          1.0.0
@@ -14,12 +14,10 @@
 
 namespace IPub\SiteHeader\Components;
 
-use Nette;
 use Nette\Application;
 use Nette\Http;
 use Nette\Utils;
 
-use IPub;
 use IPub\SiteHeader;
 
 /**
@@ -59,8 +57,10 @@ final class Control extends Application\UI\Control
 
 	/**
 	 * @return void
+	 *
+	 * @throws Application\UI\InvalidLinkException
 	 */
-	public function render()
+	public function render() : void
 	{
 		$this->renderBegin();
 		$this->renderRss();
@@ -70,7 +70,7 @@ final class Control extends Application\UI\Control
 	/**
 	 * @return void
 	 */
-	public function renderBegin()
+	public function renderBegin() : void
 	{
 		$contentType = $this->configuration->getContentType();
 
@@ -125,7 +125,7 @@ final class Control extends Application\UI\Control
 	/**
 	 * @return void
 	 */
-	public function renderEnd()
+	public function renderEnd() : void
 	{
 		echo Utils\Html::el('head')->endTag();
 	}
@@ -137,7 +137,7 @@ final class Control extends Application\UI\Control
 	 *
 	 * @throws Application\UI\InvalidLinkException
 	 */
-	public function renderRss(array $channels = NULL)
+	public function renderRss(array $channels = NULL) : void
 	{
 		if ($channels === NULL || $channels === []) {
 			$channels = $this->configuration->getRSSChannels();
@@ -161,7 +161,7 @@ final class Control extends Application\UI\Control
 	 *
 	 * @return Utils\Html
 	 */
-	private function getHtmlTag()
+	private function getHtmlTag() : Utils\Html
 	{
 		$html = Utils\Html::el('html');
 		$html->addAttributes(['class' => 'uk-height-1-1']);
@@ -185,7 +185,7 @@ final class Control extends Application\UI\Control
 	/**
 	 * @return void
 	 */
-	private function renderMetatags()
+	private function renderMetatags() : void
 	{
 		$metaTags = $this->configuration->getMetaTags();
 
@@ -208,7 +208,7 @@ final class Control extends Application\UI\Control
 	/**
 	 * @return void
 	 */
-	private function renderFavicon()
+	private function renderFavicon() : void
 	{
 		$favicon = $this->configuration->getFavicon();
 
@@ -226,7 +226,7 @@ final class Control extends Application\UI\Control
 	/**
 	 * @return void
 	 */
-	private function renderCustomLinks()
+	private function renderCustomLinks() : void
 	{
 		$customLinks = $this->configuration->getCustomLinks();
 

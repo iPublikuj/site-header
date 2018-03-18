@@ -3,8 +3,8 @@
  * TSiteHeader.php
  *
  * @copyright      More in license.md
- * @license        http://www.ipublikuj.eu
- * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @license        https://www.ipublikuj.eu
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  * @package        iPublikuj:SiteHeader!
  * @subpackage     common
  * @since          1.0.0
@@ -16,10 +16,6 @@ declare(strict_types = 1);
 
 namespace IPub\SiteHeader;
 
-use Nette;
-use Nette\Application;
-
-use IPub;
 use IPub\SiteHeader\Components;
 
 /**
@@ -45,11 +41,13 @@ trait TSiteHeader
 	/**
 	 * @param Components\IControl $siteHeaderFactory
 	 * @param Configuration $configuration
+	 *
+	 * @return void
 	 */
 	public function injectSiteHeader(
 		Components\IControl $siteHeaderFactory,
 		Configuration $configuration
-	) {
+	) : void {
 		$this->siteHeaderFactory = $siteHeaderFactory;
 		$this->siteHeaderConfiguration = $configuration;
 	}

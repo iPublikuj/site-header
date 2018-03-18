@@ -3,8 +3,8 @@
  * IControl.php
  *
  * @copyright      More in license.md
- * @license        http://www.fastybird.com
- * @author         Adam Kadlec http://www.fastybird.com
+ * @license        https://www.ipublikuj.eu
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  * @package        iPublikuj:SiteHeader!
  * @subpackage     Components
  * @since          1.0.0

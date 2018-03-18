@@ -3,8 +3,8 @@
  * Configuration.php
  *
  * @copyright      More in license.md
- * @license        http://www.ipublikuj.eu
- * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @license        https://www.ipublikuj.eu
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  * @package        iPublikujSiteHeader!
  * @subpackage     common
  * @since          1.0.0
@@ -19,8 +19,6 @@ use Nette\Http;
 use Nette\Localization;
 use Nette\Utils;
 
-use IPub;
-use IPub\SiteHeader;
 use IPub\SiteHeader\Exceptions;
 
 /**
@@ -29,30 +27,35 @@ use IPub\SiteHeader\Exceptions;
  * @package        iPublikujSiteHeader!
  * @subpackage     common
  *
- * @author         Adam Kadlec <adam.kadlec@fastybird.com>
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
  */
-final class Configuration extends Nette\Object
+final class Configuration
 {
+	/**
+	 * Implement nette smart magic
+	 */
+	use Nette\SmartObject;
+
 	/**
 	 * Content types
 	 */
-	const CONTENT_TYPE_TEXT_HTML = 'text/html';
-	const CONTENT_TYPE_APPLICATION_XHTML = 'application/xhtml+xml';
+	public const CONTENT_TYPE_TEXT_HTML = 'text/html';
+	public const CONTENT_TYPE_APPLICATION_XHTML = 'application/xhtml+xml';
 
 	/**
 	 * Doctypes
 	 */
-	const HTML_4 = self::HTML_4_STRICT; // Backwards compatibility
-	const HTML_4_STRICT = 'html4_strict';
-	const HTML_4_TRANSITIONAL = 'html4_transitional';
-	const HTML_4_FRAMESET = 'html4_frameset';
+	public const HTML_4 = self::HTML_4_STRICT; // Backwards compatibility
+	public const HTML_4_STRICT = 'html4_strict';
+	public const HTML_4_TRANSITIONAL = 'html4_transitional';
+	public const HTML_4_FRAMESET = 'html4_frameset';
 
-	const HTML_5 = 'html5';
+	public const HTML_5 = 'html5';
 
-	const XHTML_1 = self::XHTML_1_STRICT; // Backwards compatibility
-	const XHTML_1_STRICT = 'xhtml1_strict';
-	const XHTML_1_TRANSITIONAL = 'xhtml1_transitional';
-	const XHTML_1_FRAMESET = 'xhtml1_frameset';
+	public const XHTML_1 = self::XHTML_1_STRICT; // Backwards compatibility
+	public const XHTML_1_STRICT = 'xhtml1_strict';
+	public const XHTML_1_TRANSITIONAL = 'xhtml1_transitional';
+	public const XHTML_1_FRAMESET = 'xhtml1_frameset';
 
 	/**
 	 * @var string
@@ -145,7 +148,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @throws Exceptions\InvalidArgumentException
 	 */
-	public function setContentType(string $contentType, bool $force = FALSE)
+	public function setContentType(string $contentType, bool $force = FALSE) : void
 	{
 		if (
 			$contentType === self::CONTENT_TYPE_APPLICATION_XHTML &&
@@ -170,7 +173,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return string
 	 */
-	public function getContentType()
+	public function getContentType() : string
 	{
 		if ($this->isXhtmlContent()) {
 			return self::CONTENT_TYPE_APPLICATION_XHTML;
@@ -188,7 +191,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @throws Exceptions\InvalidArgumentException
 	 */
-	public function setDocumentType(string $documentType)
+	public function setDocumentType(string $documentType) : void
 	{
 		if (!in_array($documentType, [
 			self::HTML_4_STRICT, self::HTML_4_TRANSITIONAL, self::HTML_4_FRAMESET, self::HTML_5, self::XHTML_1_STRICT, self::XHTML_1_TRANSITIONAL, self::XHTML_1_FRAMESET
@@ -251,7 +254,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function setLanguage(string $language)
+	public function setLanguage(string $language) : void
 	{
 		$this->language = $language;
 	}
@@ -271,7 +274,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @throws Exceptions\InvalidArgumentException
 	 */
-	public function setTitle($title)
+	public function setTitle($title) : void
 	{
 		if (is_array($title)) {
 			$titles = $title;
@@ -296,7 +299,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @throws Exceptions\InvalidArgumentException
 	 */
-	public function addTitle(string $title)
+	public function addTitle(string $title) : void
 	{
 		$title = trim($title);
 
@@ -316,7 +319,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @throws Exceptions\InvalidArgumentException
 	 */
-	public function getTitle($index = NULL)
+	public function getTitle($index = NULL) : ?string
 	{
 		if ($index !== NULL) {
 			if ($this->title === []) {
@@ -343,7 +346,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function setTitleSeparator(string $separator)
+	public function setTitleSeparator(string $separator) : void
 	{
 		$this->titleSeparator = $separator;
 	}
@@ -353,7 +356,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function setTitleInReverseOrder(bool $titleInReverseOrder)
+	public function setTitleInReverseOrder(bool $titleInReverseOrder) : void
 	{
 		$this->titleInReverseOrder = $titleInReverseOrder;
 	}
@@ -361,9 +364,11 @@ final class Configuration extends Nette\Object
 	/**
 	 * @param array $metaTags
 	 *
+	 * @return void
+	 *
 	 * @throws Exceptions\InvalidArgumentException
 	 */
-	public function setMetaTags(array $metaTags)
+	public function setMetaTags(array $metaTags) : void
 	{
 		foreach ($metaTags as $metaTag) {
 			if (!isset($metaTag['name']) || !isset($metaTag['value'])) {
@@ -380,7 +385,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function addMetaTag(string $name, string $value)
+	public function addMetaTag(string $name, string $value) : void
 	{
 		$this->metaTags[$name] = $value;
 	}
@@ -390,7 +395,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return string|NULL
 	 */
-	public function getMetaTag(string $name)
+	public function getMetaTag(string $name) : ?string
 	{
 		return isset($this->metaTags[$name]) ? $this->metaTags[$name] : NULL;
 	}
@@ -408,7 +413,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function setFavicon(string $filename)
+	public function setFavicon(string $filename) : void
 	{
 		$this->favicon = $filename;
 	}
@@ -416,7 +421,7 @@ final class Configuration extends Nette\Object
 	/**
 	 * @return string
 	 */
-	public function getFavicon()
+	public function getFavicon() : string
 	{
 		return $this->favicon;
 	}
@@ -426,7 +431,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function addCustomLink(array $attributes)
+	public function addCustomLink(array $attributes) : void
 	{
 		$this->customLinks[] = $attributes;
 	}
@@ -444,7 +449,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function setAuthor(string $author)
+	public function setAuthor(string $author) : void
 	{
 		$this->addMetaTag('author', $author);
 	}
@@ -452,7 +457,7 @@ final class Configuration extends Nette\Object
 	/**
 	 * @return string|NULL
 	 */
-	public function getAuthor()
+	public function getAuthor() : ?string
 	{
 		return $this->getMetaTag('author');
 	}
@@ -462,7 +467,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function setDescription(string $description)
+	public function setDescription(string $description) : void
 	{
 		$this->addMetaTag('description', $description);
 	}
@@ -470,7 +475,7 @@ final class Configuration extends Nette\Object
 	/**
 	 * @return string|NULL
 	 */
-	public function getDescription()
+	public function getDescription() : ?string
 	{
 		return $this->getMetaTag('description');
 	}
@@ -480,7 +485,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function setKeywords(array $keywords)
+	public function setKeywords(array $keywords) : void
 	{
 		foreach ($keywords as $keyword) {
 			$keyword = trim($keyword);
@@ -494,7 +499,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function addKeyword(string $keyword)
+	public function addKeyword(string $keyword) : void
 	{
 		$keywords = $this->getMetaTag('keywords');
 		$keywords = $keywords === NULL ? [] : explode(',', $keywords);
@@ -509,7 +514,7 @@ final class Configuration extends Nette\Object
 	/**
 	 * @return string|NULL
 	 */
-	public function getKeywords()
+	public function getKeywords() : ?string
 	{
 		return $this->getMetaTag('keywords');
 	}
@@ -519,7 +524,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function setRobots(string $robots)
+	public function setRobots(string $robots) : void
 	{
 		$this->addMetaTag('robots', $robots);
 	}
@@ -527,7 +532,7 @@ final class Configuration extends Nette\Object
 	/**
 	 * @return string|NULL
 	 */
-	public function getRobots()
+	public function getRobots() : ?string
 	{
 		return $this->getMetaTag('robots');
 	}
@@ -539,7 +544,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @throws Exceptions\InvalidArgumentException
 	 */
-	public function setRSSChannels(array $rssChannels)
+	public function setRSSChannels(array $rssChannels) : void
 	{
 		foreach ($rssChannels as $rssChannel) {
 			if (!isset($rssChannel['title']) || !isset($rssChannel['link'])) {
@@ -556,7 +561,7 @@ final class Configuration extends Nette\Object
 	 *
 	 * @return void
 	 */
-	public function addRSSChannel(string $title, string $link)
+	public function addRSSChannel(string $title, string $link) : void
 	{
 		$this->rssChannels[md5($title . $link)] = [
 			'title' => $title,

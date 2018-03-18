@@ -29,4 +29,4 @@ extensions:
 Learn how to create page header with custom tags in [documentation](https://github.com/iPublikuj/site-header/blob/master/docs/en/index.md).
 
 ***
-Homepage [http://www.ipublikuj.eu](http://www.ipublikuj.eu) and repository [http://github.com/iPublikuj/site-header](http://github.com/iPublikuj/site-header).
+Homepage [https://www.ipublikuj.eu](https://www.ipublikuj.eu) and repository [http://github.com/iPublikuj/site-header](http://github.com/iPublikuj/site-header).
